@@ -1,0 +1,3 @@
+name: 00-single-resource
+runtime: go
+description: Provision a single resource

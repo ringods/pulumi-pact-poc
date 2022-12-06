@@ -1,0 +1,3 @@
+name: 00-single-resource
+runtime: nodejs
+description: Provision a single resource

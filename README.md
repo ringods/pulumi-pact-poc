@@ -9,7 +9,7 @@ Proof of Concept using [Pact](https://pact.io) to test the different components 
 * Execute the `install-plugin.sh`.
 * Verify the installation using the command `pact-plugin-cli list`. The output should list the protobuf as installed and enabled:
    ```sh
-   ./pact-plugin-cli list                                                                                         main  4.23 Dur  00:24:13
+   ./pact-plugin-cli list
    ┌──────────┬─────────┬───────────────────┬─────────────────────────────────────────────┬─────────┐
    │ Name     ┆ Version ┆ Interface Version ┆ Directory                                   ┆ Status  │
    ╞══════════╪═════════╪═══════════════════╪═════════════════════════════════════════════╪═════════╡

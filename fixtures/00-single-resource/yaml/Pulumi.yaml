@@ -1,0 +1,9 @@
+name: 00-single-resource
+description: Provision a single resource
+runtime: yaml
+config: {}
+variables: {}
+resources:
+  password:
+    type: random:RandomPet
+outputs: {}
