@@ -42,7 +42,7 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
   * `00-single-resource/yaml`: the handwritten YAML program
   * `00-single-resource/go`: the generated Go program using `pulumi convert`
   * `00-single-resource/ts`: the generated Typescript program using `pulumi convert`
-
+* Run the tests via `go test -v .`
 
 ## Reference
 

@@ -3,10 +3,13 @@ package main
 import (
 	// "fmt"
 	"log"
+	"os"
 	"path/filepath"
 	"testing"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/stretchr/testify/assert"
 	// engine "github.com/ringods/pulumi-pact-poc/github.com/pulumi/pulumi/sdk/v3/proto/go"
 )
@@ -59,10 +62,19 @@ func TestUserAPIClient(t *testing.T) {
 		ExecuteTest(t, func(transport message.TransportConfig, m message.SynchronousMessage) error {
 			// Execute the gRPC client against the mock server
 			log.Println("Mock server is running on ", transport.Port)
-			// area, err := GetRectangleAndSquareArea(fmt.Sprintf("localhost:%d", transport.Port))
+			wd, err := os.Getwd()
+			if err != nil {
+				return err
+			}
+			sink := cmdutil.Diag()
+			pCtx, err := plugin.NewContext(sink, sink, nil, nil, wd, nil, false, nil)
+			if err != nil {
+				return err
+			}
+			_, err = plugin.NewDefaultHost(pCtx, nil, false, nil)
 
-			// // Assert: check the result
-			// assert.NoError(t, err)
+			// Assert: check the result
+			assert.NoError(t, err)
 			// assert.Equal(t, float32(12.0), area[0])
 			// assert.Equal(t, float32(9.0), area[1])
 
