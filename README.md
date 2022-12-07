@@ -39,7 +39,7 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
 ## Test setup
 
 * Have the protobuf files available. This POC copied the Engine protobuf file from `pulumi/pulumi` over to here.
-* Generate Go code from the protobuf file: `protoc --go_out=. --go-grpc_out=. --proto_path ./proto ./proto/engine.proto`
+* Generate Go code from each protobuf file, e.g.: `protoc --go_out=. --go-grpc_out=. --proto_path ./proto ./proto/pulumi/engine.proto`
 * The `fixtures` folder contains a single Pulumi program creating a `RandomPet` resource:
   * `00-single-resource/yaml`: the handwritten YAML program
   * `00-single-resource/go`: the generated Go program using `pulumi convert`

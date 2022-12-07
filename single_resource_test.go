@@ -1,7 +1,7 @@
-package main
+package pulumipactpoc
 
 import (
-	// "fmt"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -23,11 +23,11 @@ func TestUserAPIClient(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	dir, _ := filepath.Abs("./proto/engine.proto")
+	dir, _ := filepath.Abs("./proto/pulumi/resource.proto")
 
 	grpcInteraction := `{
 		"pact:proto": "` + filepath.ToSlash(dir) + `",
-		"pact:proto-service": "Calculator/calculateMulti",
+		"pact:proto-service": "ResourceMonitor/RegisterResource",
 		"pact:content-type": "application/protobuf",
 		"request": {
 			"shapes": [
@@ -62,16 +62,49 @@ func TestUserAPIClient(t *testing.T) {
 		ExecuteTest(t, func(transport message.TransportConfig, m message.SynchronousMessage) error {
 			// Execute the gRPC client against the mock server
 			log.Println("Mock server is running on ", transport.Port)
+
+			// Try to start the Pulumi Language Host
 			wd, err := os.Getwd()
 			if err != nil {
+				log.Println("Error on os.Getwd")
 				return err
 			}
 			sink := cmdutil.Diag()
 			pCtx, err := plugin.NewContext(sink, sink, nil, nil, wd, nil, false, nil)
 			if err != nil {
+				log.Println("Error on plugin.NewContext")
 				return err
 			}
-			_, err = plugin.NewDefaultHost(pCtx, nil, false, nil)
+			host, err := plugin.NewDefaultHost(pCtx, nil, false, nil)
+			if err != nil {
+				log.Println("Error on plugin.NewDefaultHost")
+				return err
+			}
+			runtime, err := host.LanguageRuntime("./fixtures/00-single-resource/yaml", "pwd", "yaml", nil)
+			if err != nil {
+				log.Println("Error on host.LanguageRuntime")
+				return err
+			}
+			var info = plugin.RunInfo{
+				MonitorAddress:   fmt.Sprintf("%s:%d", transport.Address, transport.Port),
+				Project:          "00-single-resource",
+				Stack:            "dev",
+				Program:          "./fixtures/00-single-resource/yaml",
+				Pwd:              "./fixtures/00-single-resource/yaml",
+				Config:           nil,
+				ConfigSecretKeys: nil,
+				DryRun:           false,
+				QueryMode:        false,
+				Parallel:         10000,
+				Organization:     "",
+			}
+			message, _, err := runtime.Run(info)
+			if err != nil {
+				log.Println("Error on runtime.Run: ", message)
+				return err
+			}
+
+			// End of section starting the language host
 
 			// Assert: check the result
 			assert.NoError(t, err)
