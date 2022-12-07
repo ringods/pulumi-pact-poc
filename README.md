@@ -21,6 +21,8 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
 
 * Install `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc` tools
   * Using Homebrew: `brew install protobuf protoc-gen-go protoc-gen-go-grpc`
+* Install `pact-go` v2.0.0-beta.16 (minimum) from [Github Releases](https://github.com/pact-foundation/pact-go/releases/tag/v2.0.0-beta.16).
+* Install the pact FFI library using `pact-go -l DEBUG install -f`. Verify you see `libpact_ffi 0.3.15` (or higher) displayed in the output.
 * Install the [pact-plugin-cli](https://github.com/pact-foundation/pact-plugins/tree/main/cli#installing).
 * Download the `install-plugin.sh` script of the [protobuf plugin](https://github.com/pactflow/pact-protobuf-plugin/releases/).
 * Execute the `install-plugin.sh`.
