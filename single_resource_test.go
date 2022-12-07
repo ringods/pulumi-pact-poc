@@ -30,13 +30,13 @@ func TestUserAPIClient(t *testing.T) {
 		"pact:proto-service": "ResourceMonitor/RegisterResource",
 		"pact:content-type": "application/protobuf",
 		"request": {
-			"type": "matching(string),
-			"name": "matching(string),
-			"parent": "matching(string),
-			"custom": "matching(boolean),
+			"type": "matching(string)",
+			"name": "matching(string)",
+			"parent": "matching(string)",
+			"custom": "matching(boolean)"
 		},
 		"response": {
-			"urn": "matching(string)",
+			"urn": "matching(string)"
 		}
 	}`
 
