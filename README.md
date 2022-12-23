@@ -24,7 +24,7 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
 * Install `pact-go` v2.0.0-beta.16 (minimum) from [Github Releases](https://github.com/pact-foundation/pact-go/releases/tag/v2.0.0-beta.16).
 * Install the pact FFI library using `pact-go -l DEBUG install -f`. Verify you see `libpact_ffi 0.3.15` (or higher) displayed in the output.
 * Install the [pact-plugin-cli](https://github.com/pact-foundation/pact-plugins/tree/main/cli#installing).
-* Download the `install-plugin.sh` script of the [protobuf plugin](https://github.com/pactflow/pact-protobuf-plugin/releases/).
+* Download the `install-plugin.sh` script of the [protobuf plugin](https://github.com/pactflow/pact-protobuf-plugin/releases/) (minimum version 0.2.4).
 * Execute the `install-plugin.sh`.
 * Verify the installation using the command `pact-plugin-cli list`. The output should list the protobuf as installed and enabled:
    ```sh
@@ -32,7 +32,7 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
    ┌──────────┬─────────┬───────────────────┬─────────────────────────────────────────────┬─────────┐
    │ Name     ┆ Version ┆ Interface Version ┆ Directory                                   ┆ Status  │
    ╞══════════╪═════════╪═══════════════════╪═════════════════════════════════════════════╪═════════╡
-   │ protobuf ┆ 0.2.0   ┆ 1                 ┆ /Users/ringods/.pact/plugins/protobuf-0.2.0 ┆ enabled │
+   │ protobuf ┆ 0.2.4   ┆ 1                 ┆ /Users/ringods/.pact/plugins/protobuf-0.2.4 ┆ enabled │
    └──────────┴─────────┴───────────────────┴─────────────────────────────────────────────┴─────────┘
    ```
 
@@ -44,7 +44,7 @@ Let's see if we build a Go based test setup which sets up our message(s) expecta
   * `00-single-resource/yaml`: the handwritten YAML program
   * `00-single-resource/go`: the generated Go program using `pulumi convert`
   * `00-single-resource/ts`: the generated Typescript program using `pulumi convert`
-* Run the tests via `go test -v .`
+* Run the tests via `go test -v .`. Set `LOG_LEVEL` environment variable to `debug` or `trace` for more detailed execution information.
 
 ## Reference
 

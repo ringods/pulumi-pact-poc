@@ -16,3 +16,7 @@
 
 # Pact
 pact-plugin-cli
+# pact-protobuf-plugin install script
+install-plugin.sh
+# debug file
+*.log
