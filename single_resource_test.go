@@ -36,13 +36,13 @@ func TestUserAPIClient(t *testing.T) {
 			]
 		},
 		"request": {
-			"type": "matching(string)",
-			"name": "matching(string)",
-			"parent": "matching(string)",
-			"custom": "matching(boolean)"
+			"type": "matching(type, 'string')",
+			"name": "matching(type, 'string')",
+			"parent": "matching(type, 'string')",
+			"custom": "matching(boolean, true)"
 		},
 		"response": {
-			"urn": "matching(string)"
+			"urn": "matching(type, 'string')"
 		}
 	}`
 
