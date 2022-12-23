@@ -23,34 +23,12 @@ func TestUserAPIClient(t *testing.T) {
 	})
 	assert.NoError(t, err)
 
-	// dir, _ := filepath.Abs("./proto/pulumi/resource.proto")
-
-	// grpcInteraction := `{
-	// 	"pact:proto": "` + filepath.ToSlash(dir) + `",
-	// 	"pact:proto-service": "ResourceMonitor/RegisterResource",
-	// 	"pact:content-type": "application/protobuf",
-	// 	"pact:protobuf-config": {
-	// 		"additionalIncludes": [
-	// 			"` + filepath.ToSlash("./proto") + `"
-	// 		]
-	// 	},
-	// 	"request": {
-	// 		"type": "matching(string)",
-	// 		"name": "matching(string)",
-	// 		"parent": "matching(string)",
-	// 		"custom": "matching(boolean)"
-	// 	},
-	// 	"response": {
-	// 		"urn": "matching(string)"
-	// 	}
-	// }`
-
-	dir, _ := filepath.Abs("./proto/pulumi/language.proto")
+	dir, _ := filepath.Abs("./proto/pulumi/resource.proto")
 	protoFolder, _ := filepath.Abs("./proto")
 
 	grpcInteraction := `{
 		"pact:proto": "` + filepath.ToSlash(dir) + `",
-		"pact:proto-service": "LanguageRuntime/About",
+		"pact:proto-service": "ResourceMonitor/RegisterResource",
 		"pact:content-type": "application/protobuf",
 		"pact:protobuf-config": {
 			"additionalIncludes": [
@@ -58,15 +36,13 @@ func TestUserAPIClient(t *testing.T) {
 			]
 		},
 		"request": {
+			"type": "matching(string)",
+			"name": "matching(string)",
+			"parent": "matching(string)",
+			"custom": "matching(boolean)"
 		},
 		"response": {
-			"executable": "matching(type, 'pulumi')",
-			"version": "matching(type, '3.48.0')",
-			"metadata": {
-				"metadata": {
-					"eachKey(matching(type, 'someKey'))": "eachValue(matching(type, 'somevalue'))"
-				}
-			}
+			"urn": "matching(string)"
 		}
 	}`
 
